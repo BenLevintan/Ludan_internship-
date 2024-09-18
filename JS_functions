@@ -1,0 +1,58 @@
+/**
+ * Counts the number of cells with a specified background color in a given column.
+ *
+ * @param {string} sheetName - The name of the sheet to search in.
+ * @param {string} column - The column to count colored cells in (e.g., "A:A").
+ * @param {string} colorName - The color to count. Accepted values: "green", "orange", "gray" etc...
+ * @return {number} The count of colored cells.
+ * @customfunction
+ */
+function countColor(sheetName, column, colorName) {
+  // Validate colorName input
+  const colors = {
+    green: "#00ff00", //  hex code for your green
+    orange: "#ff9900", //  hex code for your orange
+    gray: "#666666", // hex code for your gray
+    purple: "#ff00ff" // hex code for your purple 
+  };
+
+  if (!colors[colorName]) {
+    throw new Error('Invalid color name. Accepted values: "green", "orange", "gray", "purple".');
+  }
+
+  // Get the specified sheet
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  if (!sheet) {
+    throw new Error('Sheet not found.');
+  }
+
+  // Get the specified range
+  const range = sheet.getRange(column);
+  const cells = range.getValues();
+  const backgrounds = range.getBackgrounds();
+
+  // Initialize counter
+  let count = 0;
+
+  // Loop through the cells and count the ones with the specified background color
+  for (let i = 0; i < cells.length; i++) {
+    for (let j = 0; j < cells[i].length; j++) {
+      if (backgrounds[i][j] === colors[colorName]) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+
+function getCellColor(sheetName, cellAddress) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  if (!sheet) {
+    throw new Error('Sheet not found.');
+  }
+  var cell = sheet.getRange(cellAddress);
+  var color = cell.getBackground();
+  return color;
+}
