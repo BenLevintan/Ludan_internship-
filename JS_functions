@@ -10,14 +10,16 @@
 function countColor(sheetName, column, colorName) {
   // Validate colorName input
   const colors = {
-    green: "#00ff00", //  hex code for your green
-    orange: "#ff9900", //  hex code for your orange
-    gray: "#666666", // hex code for your gray
-    purple: "#ff00ff" // hex code for your purple 
-  };
+    green: "#00ff00", //  hex code for green
+    orange: "#ff9900", //  hex code for orange
+    gray: "#666666", // hex code for gray
+    purple: "#ff00ff", // hex code for purple 
+    light_orange: "#f9cb9c",  // hex code for light orange 
+    blue: "#00ffff" // hex code for blue
+  }
 
   if (!colors[colorName]) {
-    throw new Error('Invalid color name. Accepted values: "green", "orange", "gray", "purple".');
+    throw new Error('Invalid color name. Accepted values: "green", "orange", "gray", "purple", "light_orange", "Blue".');
   }
 
   // Get the specified sheet
